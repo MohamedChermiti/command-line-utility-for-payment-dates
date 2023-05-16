@@ -7,6 +7,11 @@ This project generates payment dates for the sales department based on certain r
 - Symfony 6
 - Composer
 
+## Demo
+
+[DEMO.webm](https://github.com/MohamedChermiti/command-line-utility-for-payment-dates/assets/29875144/c9e1dea9-f7d8-46bd-ae0b-daa5dbfea5f3)
+
+
 ## Installation and Usage
 
 To run the project:
