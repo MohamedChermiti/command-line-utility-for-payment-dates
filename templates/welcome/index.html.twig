@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Dates for the Year <?php echo date('Y'); ?></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+    
+        <h2>Payment Dates for the Year {{ "now"|date("Y") }}</h2>
+        <button class="btn btn-primary" onclick="generatePaymentDates()">Generate Payment Dates</button>
+
+        <div id="popup" class="popup" style="display: none;"></div>
+    </div>
+
+    <script>
+        function generatePaymentDates() {
+            fetch('{{ path('app_generate_payment_dates') }}')
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob();
+                    } else {
+                        throw new Error('An error occurred while generating payment dates.');
+                    }
+                })
+                .then(blob => {
+                    showPopup('Payment dates generated successfully.', 'success');
+
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = 'payment_dates.csv';
+                    link.style.display = 'none';
+
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                })
+                .catch(error => {
+                    showPopup(error.message, 'fail');
+                });
+        }
+
+        function showPopup(message, status) {
+            const popup = document.getElementById('popup');
+            popup.innerHTML = message;
+            popup.classList.add(status);
+            popup.style.display = 'block';
+
+            setTimeout(function() {
+                popup.style.display = 'none';
+                popup.classList.remove(status);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
