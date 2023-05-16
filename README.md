@@ -1,15 +1,21 @@
-# command-line-utility-for-payment-dates
+# Payment Dates CSV
 
-Requirements
-PHP8
-SYMFONY 6
-COMPOSER
+This project generates payment dates for the sales department based on certain rules. It provides a web application interface to generate payment dates or you can run a script separately to generate the CSV file directly.
 
-To run the project :
-1- clone the project
-2- run the command composer install
-3- run the command php -S localhost:8000 -t public
+## Requirements
+- PHP 8
+- Symfony 6
+- Composer
 
+## Installation and Usage
 
-If you want the script only to generate the csv file without using the web app just excute the file GenerateDatesCSV.php with this command
-php GenerateDatesCSV.php and you'll get the csv file in the same directory the script exists.
+To run the project:
+
+1. Clone the project repository.
+2. Install project dependencies using  `composer install`
+3. Start the local development server `php -S localhost:8000 -t public`
+4. Access the web application in your browser at `http://localhost:8000`.
+
+If you want to generate the CSV file without using the web application, you can run the `GenerateDatesCSV.php` script separately by executing the following command:
+`php GenerateDatesCSV.php`
+This will generate the CSV file in the same directory where the script exists.
